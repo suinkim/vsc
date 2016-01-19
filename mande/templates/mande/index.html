@@ -1,7 +1,7 @@
 {% if latest_job_list %}
     <ul>
     {% for job in latest_job_list %}
-        <li><a href="{% url 'mande:detail' job.id %}">{{ job.job_text }}</a></li>
+        <li><a href="{% url 'mande:detail' job.job_id %}">{{ job.job_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

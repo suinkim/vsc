@@ -1,6 +1,12 @@
 <h1>{{ job.job_title }}</h1>
-<ul>
+<p>{{job.job_text}}</p>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'mande:vote' job.job_id %}" method="post">
+{% csrf_token %}
 {% for choice in job.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 {% endfor %}
-</ul>
+<input type="submit" value="Vote" />
+</form>

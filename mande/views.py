@@ -5,6 +5,8 @@ from django.views import generic
 
 from .models import Choice, Job
 
+def home(request):
+    return render(request, 'mande/home.html')
 
 class IndexView(generic.ListView):
     template_name = 'mande/index.html'

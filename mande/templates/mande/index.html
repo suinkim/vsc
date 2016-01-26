@@ -1,12 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
 {% if latest_job_list %}
-    <ul>
+
     {% for job in latest_job_list %}
-        <li><a href="{% url 'mande:detail' job.job_id %}">{{ job.job_text }}</a></li>
+        <div class="row">
+            <div class="col-md-7">
+                <a href="{% url 'mande:detail' job.job_id %}">
+                    <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-5">
+                <h3>{{job.job_title}}</h3>
+                <h4>Subheading</h4>
+                <p>{{job.job_text}}</p>
+                <a class="btn btn-primary" href="{% url 'mande:detail' job.job_id %}">Sign up<span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+        <hr>
     {% endfor %}
-    </ul>
+
 {% else %}
     <p>No jobs are available.</p>
 {% endif %}
+
+
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
 {% endblock %}

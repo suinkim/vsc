@@ -8,6 +8,9 @@ from .models import Choice, Job
 def home(request):
     return render(request, 'mande/home.html')
 
+def signup(request):
+    return render(request, 'mande/signup.html')
+
 class IndexView(generic.ListView):
     template_name = 'mande/index.html'
     context_object_name = 'latest_job_list'

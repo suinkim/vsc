@@ -2,60 +2,28 @@
 {% block title %}{{job.job_title}}{% endblock %}
 {% block content %}
 <p>{{job.job_text}}</p>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'mande:vote' job.job_id %}" method="post">
-{% csrf_token %}
-{% for choice in job.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<div class="top-content">
-
-    <div class="inner-bg">
-        <div class="container">
-
-                <div class="col-sm-5-center">
-
-                  <div class="form-box">
-                    <div class="form-top">
-                      <div class="form-top-left">
-                        <h3>Sign up now</h3>
-                          <p>Fill in the form below to request for the job!:</p>
-                      </div>
-                      <div class="form-top-right">
-                        <i class="fa fa-pencil"></i>
-                      </div>
-                      </div>
-                      <div class="form-bottom">
-                    <form role="form" action="" method="post" class="registration-form">
-                      <div class="form-group">
-                        <label class="sr-only" for="form-first-name">First name</label>
-                          <input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
-                        </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="form-last-name">Last name</label>
-                          <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
-                        </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="form-email">Email</label>
-                          <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-                        </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="form-about-yourself">About yourself</label>
-                          <textarea name="form-about-yourself" placeholder="About yourself..."
-                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Sign me up!</button>
-                    </form>
-                  </div>
-                  </div>
-
-                </div>
-            </div>
-
-        </div>
+  <h3>Sign up now</h3>
+  <p>Fill in the form below to request for the job!:</p>
+  <form role="form" action="" method="post" class="registration-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label class="sr-only" for="form-name">First name</label>
+      <input type="text" name="form-name" placeholder="Name..." class="form-name form-control" id="form-name">
     </div>
+    <div class="form-group">
+      <label class="sr-only" for="form-last-name">Grade</label>
+      <input type="num" name="form-grade" placeholder="Grade..." class="form-grade form-control" id="form-grade">
+    </div>
+    <div class="form-group">
+      <label class="sr-only" for="form-email">Email</label>
+      <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+    </div>
+    <div class="form-group">
+      <label class="sr-only" for="form-about-yourself">About yourself</label>
+        <textarea name="form-about-yourself" placeholder="About yourself..."
+          class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+    </div>
+    <button type="submit" class="btn" href="{% url 'mande:results' job.job_id %}">Sign me up!</button>
+  </form>
 
-</div>
 {% endblock %}

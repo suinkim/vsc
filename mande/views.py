@@ -17,10 +17,10 @@ class IndexView(generic.ListView):
         return Job.objects.order_by('-pub_date')[:5]
 
 
-class DetailView(generic.DetailView):
-    model = Job
-    template_name = 'mande/detail.html'
-
+def detail(request):
+    #job = get_object_or_404(Job, pk=job_id)
+    #model = Job
+    return render(request, 'mande/detail.html', {'n' : range(1,13)})
 
 class ResultsView(generic.DetailView):
     model = Job

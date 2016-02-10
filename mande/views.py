@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
 
@@ -17,14 +17,13 @@ class IndexView(generic.ListView):
         return Job.objects.order_by('-pub_date')[:5]
 
 
-def detail(request):
-    #job = get_object_or_404(Job, pk=job_id)
-    #model = Job
-    return render(request, 'mande/detail.html', {'n' : range(1,13)})
+def detail(request, job_id):
+    job = get_object_or_404(Job, pk=job_id)
+    return render(request, 'mande/detail.html', {'job' : job,'n' : range(1,13)})
 
-class ResultsView(generic.DetailView):
-    model = Job
-    template_name = 'mande/results.html'
+def results(request, job_id):
+    job = get_object_or_404(Job, pk=job_id)
+    return render(request, 'mande/results.html', {'job' : job})
 
 #def vote(request, job_id):
 #    job = get_object_or_404(Job, pk=job_id)

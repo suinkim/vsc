@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 
 from .models import Job, Volunteer
-from .forms import SignupForm
+from .forms import VolunteerForm
 
 def home(request):
     return render(request, 'mande/home.html')
@@ -19,23 +19,14 @@ class IndexView(generic.ListView):
 
 
 def detail(request, job_id):
-    job = get_object_or_404(Job, pk=job_id)
-    print ("start")
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            job.new_volunteer = form.save()
-            return HttpResponse("thanks")
-            print("yes")
-    else:
-        form = SignupForm()
-        print ("a")
-    #volunteer = job.volunteer_set
-    #form = SignupForm(request.POST)
-    #if request.method == 'POST':
-    #    if form.is_valid():
-    #        volunteerform.save()
-    return render(request, 'mande/detail.html', {'job' : job,'n' : range(1,13)})
+    job = Job.objects.get(pk=job_id)
+    form = VolunteerForm(request.POST or None)
+    if form.is_valid():
+        vol = form.save(commit=False)
+        vol.job = job
+        vol.save()
+        return HttpResponseRedirect('results')
+    return render(request, 'mande/detail.html', {'form':form, 'job' : job,'n' : range(1,13)})
 
 def results(request, job_id):
     job = get_object_or_404(Job, pk=job_id)

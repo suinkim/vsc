@@ -6,9 +6,9 @@ class VolunteerInline(admin.TabularInline):
     extra = 0
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('job_text', 'date', 'pub_date')
+    list_display = ('job_title', 'date', 'pub_date')
     list_filter = ['pub_date']
-    search_fields = ['job_text']
+    search_fields = ['job_title']
     inlines = [VolunteerInline]
 
 admin.site.register(Job, JobAdmin)

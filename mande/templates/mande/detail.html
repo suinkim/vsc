@@ -5,16 +5,16 @@
   <h3>Sign up now</h3>
   <p>Fill in the form below to request for the job!:</p>
   <div class= "col-sm-5">
-    <form role="form" action="" method="post" class="registration-form">
+    <form role="form" action="" method="post" class="SignupForm">
       {% csrf_token %}
       <div class="row form-inline">
         <div class="form-group">
-          <label for="inputName">Name</label>
-          <input type="text" class="form-control" id="inputName" placeholder="Jane Doe">
+          <label for="volunteer_name">Name</label>
+          <input type="text" class="form-control" id="volunteer_name" placeholder="Jane Doe">
         </div>
         <div class="form-group">
-          <label for="inputGrade">Grade</label>
-          <select class="form-control" id="inputGrade">
+          <label for="volunteer_grade">Grade</label>
+          <select class="form-control" id="volunteer_grade">
             {% for i in n %}
             <option>{{i}}</option>
             {% endfor %}
@@ -23,16 +23,16 @@
       </div>
       <div class="row form-inline">
         <div class="form-group">
-          <label for="form-email">Email</label>
-          <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="inputEmail">
+          <label for="volunteer_email">Email</label>
+          <input type="text" name="volunteer_email" placeholder="Email..." class="form-email form-control" id="volunteer_email">
         </div>
       </div>
       <div class="row form-group">
-        <label for="inputDetail">Why do you want this job?</label>
-          <textarea name="inputDetail" placeholder="About yourself..."
-            class="form-about-yourself form-control" id="inputDetail"></textarea>
+        <label for="volunteer_detail">Why do you want this job?</label>
+          <textarea name="volunteer_detail" placeholder="About yourself..."
+            class="form-about-yourself form-control" id="volunteer_detail"></textarea>
       </div>
-      <button type="post" class="btn">Sign me up!</button>
+      <button type="submit" class="btn">Sign me up!</button>
     </form>
   </div>
 {% endblock %}

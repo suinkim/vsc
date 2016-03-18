@@ -1,3 +1,5 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -7,7 +9,8 @@ from .models import Job, Volunteer
 from .forms import VolunteerForm
 
 def home(request):
-    return render(request, 'mande/home.html')
+    job = Job.objects.all()
+    return render(request, 'mande/home.html', {'latest_job_list': job})
 
 class IndexView(generic.ListView):
     template_name = 'mande/index.html'
@@ -16,7 +19,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published jobs."""
         return Job.objects.order_by('-pub_date')[:5]
-
 
 def detail(request, job_id):
     job = Job.objects.get(pk=job_id)
@@ -32,17 +34,12 @@ def results(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
     return render(request, 'mande/results.html', {'job' : job})
 
-#def vote(request, job_id):
-#    job = get_object_or_404(Job, pk=job_id)
-#    try:
-#        selected_choice = job.choice_set.get(pk=request.POST['choice'])
-#    except (KeyError, Choice.DoesNotExist):
-#        # Redisplay the job voting form.
-#        return render(request, 'mande/results.html', {
-#            'job': job,
-            #'error_message': "You didn't select a choice.",
-#        })
-#    else:
-#        selected_choice.votes += 1
-#        selected_choice.save()
-#        return HttpResponseRedirect(reverse('mande:results', args=(job.job_id,)))
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})

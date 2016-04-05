@@ -1,14 +1,53 @@
 {% extends "base.html" %}
 {% block title %}{{job.job_title}}{% endblock %}
 {% block content %}
-<p>{{job.job_text}}</p>
-  <h3>Sign up now</h3>
-  <p>Fill in the form below to request for the job!:</p>
-  <div class= "col-sm-5">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="OK">
-    </form>
-  </div>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i>  <span class="light">Create an</span> Account
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Jobs</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<section>
+  <br><br><br><br>
+  <div class="container">
+    <h3>Sign up now</h3>
+    <p>{{job.job_text}}</p>
+      <p>Fill in the form below to request for the job!:</p>
+      <div class= "col-sm-5">
+        <form class="pure-form" action="" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="OK">
+        </form>
+      </div>
+    </div>
+  </section>
+</body>
 {% endblock %}

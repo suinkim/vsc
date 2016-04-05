@@ -10,7 +10,7 @@ from .forms import VolunteerForm
 
 def home(request):
     job = Job.objects.all()
-    return render(request, 'mande/home.html', {'latest_job_list': job})
+    return render(request, 'mande/test.html', {'latest_job_list': job})
 
 class IndexView(generic.ListView):
     template_name = 'mande/index.html'
@@ -43,3 +43,9 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+def login(request):
+    return render(request, 'registration/login.html')
+
+def logout(request):
+    return render(request, 'registration/logout.html')
